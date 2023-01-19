@@ -32,16 +32,13 @@ function runFirstRotation() {
     playBtn.style.cursor = 'default'
     wrapper.style.pointerEvents = 'none'
     setTimeout(() => {
-        mainWheel.classList.add('_win')
-    }, 6000)
-    setTimeout(() => {
         doAfterFirstRotation()
-    }, 8000)
+    }, 6000)
     triesCounter++
 }
 
 function doAfterFirstRotation() {
-    wheel.style.transform = 'rotate(992deg)'
+    wheel.style.transform = 'rotate(1037deg)'
     wheel.classList.remove('reel-rotation-first')
     displayPopup(popupFirst)
     wrapper.style.pointerEvents = 'auto'
@@ -59,11 +56,8 @@ function runSecondRotation() {
     overflow.style.overflow = 'hidden'
     wrapper.style.pointerEvents = 'none'
     setTimeout(() => {
-        mainWheel.classList.add('_win')
-    }, 6000)
-    setTimeout(() => {
         doAfterSecondRotation()
-    }, 8000)
+    }, 6000)
     triesCounter++
 }
 
