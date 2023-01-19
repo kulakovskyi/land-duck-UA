@@ -1,0 +1,579 @@
+$blue: #000055
+$magenta: #ff267e
+$green: #05C489
+$green-hover: #09B47F
+$grey: #EDEDED
+$text: #000
+$white: #fff
+
+$font-suisse-bold: SuisseIntl-Bold, sans-serif
+$font-suisse-reg: SuisseIntl-Regular, sans-serif
+$font-suisse-med: SuisseIntl-Medium, sans-serif
+$font-suisse-semb: SuisseIntl-SemiBold, sans-serif
+$font-nunito-black: Nunito-Black, sans-serif
+$font-dinPro-condLight: DINPro-CondLight, sans-serif
+
+body
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+  overscroll-behavior: none
+  img
+    max-width: 100%
+    height: auto
+
+.container
+  max-width: 700px
+  margin: auto
+
+.position
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  margin: auto
+
+.btn
+  font-family: $font-suisse-semb
+  font-size: 18px
+  color: $blue
+  text-transform: uppercase
+  letter-spacing: 0.07em
+  background: $green
+  border-radius: 5px
+  transition: background .3s linear
+  &:hover
+    background: $green-hover
+
+.zsu
+  width: 100%
+  height: 100%
+  overflow: hidden
+  position: relative
+  background: $blue
+  &__overlay
+    background: rgba($text,.6)
+    display: flex
+    justify-content: center
+    align-items: center
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 10
+    transition: opacity .5s linear, visibility .5s linear
+  &__firstWin,
+  &__secondWin
+    background: url("../img/popup-small.jpg") no-repeat 0 0/cover
+    width: 400px
+    height: 638px
+    position: relative
+    border-radius: 8px
+    &-info
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: space-between
+      position: absolute
+      top: 47px
+      bottom: 47px
+      left: 52px
+      right: 52px
+    &-title
+      font-family: $font-suisse-semb
+      font-size: 24px
+      line-height: 26px
+      color: $grey
+      text-transform: uppercase
+      letter-spacing: 0.03em
+      text-align: center
+    &-img
+      background: url("../img/ship_2.png") no-repeat 0 0/contain
+      width: 155px
+      height: 74px
+      margin-top: 98px
+    &-sum
+      font-family: $font-suisse-bold
+      font-size: 64px
+      line-height: 66px
+      color: $grey
+      text-transform: uppercase
+      letter-spacing: 0.03em
+      margin-top: 15px
+    &-try
+      margin: 104px 0 auto
+      font-family: $font-suisse-semb
+      font-size: 16px
+      line-height: 26px
+      color: $grey
+      letter-spacing: 0.03em
+      text-align: center
+      .amount
+        span
+          color: $magenta
+    &-btn
+      width: 100%
+      padding: 24px 0 22px
+      text-align: center
+      cursor: pointer
+  &__secondWin
+    &-img
+      background: url("../img/ship_3.png") no-repeat 0 0/contain
+      width: 127px
+      height: 79px
+      margin-top: 69px
+    &-sum
+      margin-top: 0
+      &-fr
+        font-family: $font-suisse-semb
+        font-size: 24px
+        line-height: 47px
+        letter-spacing: 0.03em
+        color: $white
+        text-transform: uppercase
+        display: flex
+        align-items: center
+        &:before
+          content: ''
+          background: url("../img/plus.svg") no-repeat 0 0/contain
+          width: 43px
+          height: 43px
+          margin-right: 12px
+          display: inline-block
+    &-try
+      margin: 94px 0 auto
+  &__rules
+    background: url("../img/popup-big.png") no-repeat 0 0/contain
+    width: 822px
+    height: 556px
+    position: relative
+    &:before
+      content: ""
+      background: url("../img/marka.png") no-repeat 0 0/contain
+      filter: drop-shadow(2px -3px 4px rgba(0, 0, 0, 0.4))
+      transform: rotate(-10deg)
+      width: 146px
+      height: 176px
+      position: absolute
+      bottom: -57px
+      left: -45px
+    &-close
+      position: absolute
+      top: 25px
+      right: 32px
+      width: 52px
+      height: 52px
+      display: flex
+      justify-content: center
+      align-items: center
+      cursor: pointer
+      &:before,
+      &:after
+        content: ""
+        width: 3px
+        height: 24px
+        background: $text
+      &:before
+        transform: rotate(45deg) translateX(2px)
+      &:after
+        transform: rotate(-45deg) translateX(-2px)
+    &-txt
+      position: absolute
+      top: 86px
+      bottom: 62px
+      left: 89px
+      right: 57px
+      overflow-x: hidden
+      overflow-y: scroll
+      padding-right: 37px
+      &::-webkit-scrollbar
+        width: 2px
+        background: #BFBFBF
+        border-radius: 100px
+      &::-webkit-scrollbar-thumb
+        background: $text
+      &-title
+        font-family: $font-suisse-semb
+        font-size: 22px
+        line-height: 22px
+        color: $text
+        text-transform: uppercase
+        letter-spacing: 0.03em
+      &-list
+        margin: 25px 0 0 20px
+      &-item,&-info,&-descr,
+      &-more
+        font-family: $font-suisse-reg
+        font-size: 16px
+        line-height: 24px
+        color: $text
+        list-style-type: disc
+        letter-spacing: 0.02em
+        margin-bottom: 15px
+        &:last-child
+          margin-bottom: 0
+      &-item
+        line-height: 18px
+      &-descr
+        margin-top: 20px
+      &-info
+        margin: 15px 0 35px
+      &-more
+        margin: 15px 0 0
+        a
+          color: $magenta
+          text-decoration: underline
+          word-wrap: break-word
+          &:hover
+            text-decoration: none
+  .popup-win
+    .zsu__rules-close
+      display: none
+    .zsu__rules-txt
+      bottom: 200px
+    .zsu__rules-btn
+      display: inline-block
+  &__main
+    height: 100%
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    &-video
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      &-bg
+        width: 100%
+        height: 90%
+        object-fit: cover
+    &-logo
+      background: url("../img/logo.svg") no-repeat 0 0/contain
+      width: 403px
+      height: 131px
+      position: absolute
+      top: 0
+      left: 0
+      z-index: 1
+    &-wrapper
+      position: relative
+      z-index: 2
+    &-right
+      &-try
+        background: url("../img/speech.png") no-repeat 0 0/contain
+        width: 165px
+        height: 112px
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        text-align: center
+        position: absolute
+        right: -66px
+        bottom: 235px
+        transition: opacity .4s linear
+        span
+          font-family: $font-nunito-black
+          font-size: 16px
+          line-height: 19px
+          color: $text
+          text-transform: uppercase
+          margin-left: -3px
+          &:first-child
+            margin-top: -15px
+      &-ducks
+        display: none
+        background: url("../img/ducks.png") no-repeat 0 0/contain
+    &-wheel
+      width: 725px
+      height: 868px
+      position: relative
+      flex-shrink: 0
+      transform: scale(0.75)
+      margin-bottom: 85px
+      &-wrap
+        position: relative
+      &-arrow
+        background: url("../img/wheel-arrow.png") no-repeat 0 0/contain
+        width: 91px
+        height: 96px
+        top: 4px
+        bottom: auto
+        z-index: 3
+      &-btn
+        background: url("../img/wheel-btn.png") no-repeat 0 0/contain
+        width: 206px
+        height: 226px
+        z-index: 4
+        cursor: pointer
+        transform: translateY(5px)
+        display: flex
+        justify-content: center
+        align-items: center
+        span
+          font-family: $font-nunito-black
+          font-size: 34px
+          line-height: 37px
+          color: $text
+          text-transform: uppercase
+          letter-spacing: 0.07em
+      &-frame
+        background: url("../img/wheel-frame.png") no-repeat 0 0/contain
+        width: 725px
+        height: 729px
+        position: relative
+        z-index: 2
+      &-reel
+        background: url("../img/wheel-reel.png") no-repeat 0 0/contain
+        width: 713px
+        height: 713px
+        top: 13px
+        bottom: auto
+        z-index: 1
+        transform: rotate(1deg)
+        image-rendering: -webkit-optimize-contrast
+      &-bottom
+        background: url("../img/wheel-bottom.png") no-repeat 0 0/contain
+        width: 711px
+        height: 229px
+        top: auto
+        bottom: -190px
+    &-txt
+      width: 350px
+      position: absolute
+      top: 275px
+      right: -385px
+      &-title
+        font-family: $font-suisse-semb
+        font-size: 62px
+        line-height: 70px
+        color: $white
+        text-transform: uppercase
+        letter-spacing: 0.03em
+      &-subtitle
+        margin-top: 20px
+        font-family: $font-suisse-med
+        font-size: 30px
+        line-height: 31px
+        color: $white
+        letter-spacing: 0.03em
+        display: flex
+        align-items: center
+        &:before
+          content: ""
+          background: url("../img/plus.svg") no-repeat 0 0/contain
+          width: 49px
+          height: 49px
+          margin-right: 14px
+          display: inline-block
+    &-infoMob
+      display: none
+      background: url(../img/bg-drop.jpg) no-repeat 50% 100%/cover
+      margin-top: -1px
+      .rules-mob
+        &:nth-of-type(2)
+          margin: 17px 0
+        &__drop
+          width: 372px
+          margin: auto
+          .dropdown
+            outline: none!important
+            cursor: pointer
+            margin-bottom: 10px
+            border: 1px solid $text
+            border-radius: 9px
+            &:last-child
+              margin-bottom: 0
+            &[open]
+              summary
+                border-radius: 9px 9px 0 0
+                &:after
+                  transform: rotate(180deg)
+            summary::-webkit-details-marker
+              display: none
+            > summary
+              list-style: none
+            summary
+              font-family: $font-suisse-semb
+              font-size: 17px
+              line-height: 23px
+              letter-spacing: 0.03em
+              text-transform: uppercase
+              background: $grey
+              color: $text
+              outline: none!important
+              position: relative
+              padding: 20px 123px 12px 20px
+              border-radius: 9px
+              ::-webkit-details-marker
+                display: none
+              &:after
+                content: ''
+                background: url("../img/arrow.svg") no-repeat 0 0/contain
+                display: inline-block
+                width: 22px
+                height: 11px
+                position: absolute
+                right: 26px
+                top: 35px
+              &:before
+                content: ''
+                background: url("../img/drop-line.svg") no-repeat 0 0/contain
+                width: 100%
+                height: 6px
+                position: absolute
+                left: 0
+                right: 0
+                top: 0
+            .drop-txt
+              font-size: 14px
+              line-height: 22px
+              letter-spacing: 0.03em
+              color: $text
+              padding: 0 29px 30px
+              background: $grey
+              border-top: 1px solid $grey
+              font-family: $font-suisse-reg
+              cursor: auto
+              border-radius: 0 0 9px 9px
+              p+p
+                margin-top: 10px
+              a
+                color: $magenta
+  &__footer
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 4
+    display: flex
+    flex-direction: column
+    &-descr
+      height: 66px
+      background: $blue
+      display: flex
+      justify-content: space-between
+      align-items: center
+      padding: 0 20px
+    &-rules
+      font-family: $font-suisse-semb
+      font-size: 14px
+      color: $green
+      text-transform: uppercase
+      letter-spacing: 0.08em
+      text-decoration: underline
+      cursor: pointer
+      &:hover
+        text-decoration: none
+    &-icons
+      display: flex
+      &-wrap
+        display: flex
+        align-items: center
+        &:first-child
+          margin-right: 39px
+          div
+            &:not(:last-child)
+              margin-right: 17px
+      &-age,
+      &-visa
+        background: url("../img/icon-21.svg") no-repeat 0 0/contain
+        width: 38px
+        height: 25px
+      &-applePay
+        background: url("../img/apple-pay.svg") no-repeat 0 0/contain
+        width: 57px
+        height: 27px
+      &-googlePay
+        background: url("../img/google-pay.svg") no-repeat 0 0/contain
+        width: 55px
+        height: 22px
+      &-visa
+        background: url("../img/visa.svg") no-repeat 0 0/contain
+      &-mcard
+        background: url("../img/mastercard.svg") no-repeat 0 0/contain
+        width: 37px
+        height: 22px
+      &-apple
+        background: url("../img/app-store.png") no-repeat 0 0/contain
+        width: 115px
+        height: 39px
+        margin-right: 10px
+      &-google
+        background: url("../img/google-play.png") no-repeat 0 0/contain
+        width: 129px
+        height: 39px
+    &-warning
+      text-transform: uppercase
+      font-family: $font-dinPro-condLight
+      font-size: 54px
+      line-height: 62px
+      letter-spacing: -0.03em
+      color: $text
+      background: $grey
+      text-align: center
+      padding: 8px 0 5px
+  &__ship
+    position: absolute
+    left: 245px
+    bottom: 470px
+    &-img
+      background: url("../img/ship_1.png") no-repeat 0 0/contain
+      width: 330px
+      height: 155px
+      animation: ship-rocking 3.2s infinite
+  &__dron
+    background: url("../img/dron_mob.png") no-repeat 0 0/contain
+    display: none
+
+.pulse-btn
+  animation: 1.8s infinite pulse-btn ease-in-out
+
+
+@keyframes ship-rocking
+  50%
+    transform: rotateZ(4deg) translateY(-4px)
+
+@keyframes pulse-btn
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(1.2)
+  100%
+    transform: scale(1)
+
+.reel-rotation-first
+  animation: 6s reel-rotation-first cubic-bezier(.25,.75,.5,1.05) forwards
+
+@keyframes reel-rotation-first
+  0%
+    transform: rotate(0deg)
+  80%
+    transform: rotate(1043deg)
+  90%
+    transform: rotate(1031deg)
+  100%
+    transform: rotate(1037deg)
+
+.reel-rotation-second
+  animation: 6s reel-rotation-second cubic-bezier(.25,.75,.5,1.05) forwards
+
+@keyframes reel-rotation-second
+  0%
+    transform: rotate(1037deg)
+  80%
+    transform: rotate(1808deg)
+  90%
+    transform: rotate(1796deg)
+  100%
+    transform: rotate(1802deg)
+
+.hide
+  display: none
+
+.opacity-overlay
+  opacity: 0
+  visibility: hidden
+
