@@ -1,77 +1,53 @@
 
-const playBtn = document.querySelector('.zsu__main-wheel-btn'),
-      playBtnText = document.querySelector('.zsu__main-wheel-btn span'),
-      wheel = document.querySelector('.zsu__main-wheel-reel'),
-      tries = document.querySelector('.try-number'),
-      overlay = document.querySelector('.zsu__overlay'),
-      popupFirst = document.querySelector('.zsu__firstWin'),
-      popupFirstBtn = document.querySelector('.zsu__firstWin-btn'),
-      popupSecond = document.querySelector('.zsu__secondWin'),
-      rules = document.querySelector('.zsu__rules'),
-      footerRulesBtn = document.querySelector('.zsu__footer-rules'),
+const playBtn = document.querySelector('.bonus__main-wheel-btn'),
+      main = document.querySelector('.bonus__main'),
+      wheel = document.querySelector('.bonus__main-wheel-reel'),
+      mainWheel = document.querySelector('.bonus__main-wheel'),
+      overlay = document.querySelector('.bonus__overlay'),
+      popupFirst = document.querySelector('.bonus__firstWin'),
+      popupFirstBtn = document.querySelector('.bonus__firstWin-btn'),
+      popupSecond = document.querySelector('.bonus__secondWin'),
       overflow = document.querySelector('body'),
-      popupClose = document.querySelector('.zsu__rules-close'),
-      video = document.querySelector('.zsu__main-video'),
-      wrapper = document.querySelector('.zsu'),
-      ShipImg = document.querySelector('.zsu__ship-img'),
-      totalTriesCounter = 2
+      wrapper = document.querySelector('.bonus'),
+      rotateText = document.querySelector('.bonus__main-txt-center')
+
+
 
 let triesCounter = 0
-
-footerRulesBtn.addEventListener('click', () => {
-    overlay.classList.remove('opacity-overlay')
-    rules.classList.remove('hide')
-})
-
-popupClose.addEventListener('click', () => {
-    overlay.classList.add('opacity-overlay')
-    rules.classList.add('hide')
-    overflow.style.overflow = 'unset'
-})
+let textAfterRotate = 'У тебе <span>1</span> спроби';
 
 playBtn.addEventListener('click', () => {
     if (triesCounter === 0) {
         runFirstRotation()
+        rotateText.innerHTML = textAfterRotate;
+
     } else {
         runSecondRotation()
     }
 })
 
-function updTriesCounter() {
-    const cnt = totalTriesCounter - triesCounter
-    if (cnt === 2) {
-        tries.innerText = "2 спроби"
-    } else if (cnt === 1) {
-        tries.innerText = "1 спроба"
-    } else {
-        tries.innerText = "0 спроб"
-    }
-}
-
 function runFirstRotation() {
     wheel.classList.add('reel-rotation-first')
     playBtn.classList.remove('pulse-btn')
-    playBtnText.classList.add('hide')
-    playBtn.style.transform = 'scale(0.9)'
     playBtn.style.cursor = 'default'
     wrapper.style.pointerEvents = 'none'
     setTimeout(() => {
-        doAfterFirstRotation()
+        mainWheel.classList.add('_win')
     }, 6000)
+    setTimeout(() => {
+        doAfterFirstRotation()
+    }, 8000)
     triesCounter++
-    updTriesCounter()
 }
 
 function doAfterFirstRotation() {
-    wheel.style.transform = 'rotate(1037deg)'
+    wheel.style.transform = 'rotate(992deg)'
     wheel.classList.remove('reel-rotation-first')
     displayPopup(popupFirst)
     wrapper.style.pointerEvents = 'auto'
     overflow.style.overflow = 'hidden'
     setTimeout(() => {
         playBtn.classList.add('pulse-btn')
-        playBtnText.classList.remove('hide')
-        playBtn.style.transform = 'scale(1)'
         playBtn.style.cursor = 'pointer'
     }, 1200)
 }
@@ -79,31 +55,29 @@ function doAfterFirstRotation() {
 function runSecondRotation() {
     wheel.classList.add('reel-rotation-second')
     playBtn.classList.remove('pulse-btn')
-    playBtnText.classList.add('hide')
-    playBtn.style.transform = 'scale(0.9)'
     playBtn.style.cursor = 'default'
     overflow.style.overflow = 'hidden'
     wrapper.style.pointerEvents = 'none'
     setTimeout(() => {
-        doAfterSecondRotation()
+        mainWheel.classList.add('_win')
     }, 6000)
+    setTimeout(() => {
+        doAfterSecondRotation()
+    }, 8000)
     triesCounter++
-    updTriesCounter()
 }
 
 function doAfterSecondRotation() {
     displayPopup(popupSecond)
     wrapper.style.pointerEvents = 'auto'
-    ShipImg.style.background = "url(\"img/ship_3.png\") no-repeat 0 0/contain"
-    ShipImg.style.animation = "none"
 }
+
 
 popupFirstBtn.addEventListener('click', () => {
     overlay.classList.add('opacity-overlay')
     popupFirst.classList.add('hide')
     overflow.style.overflow = 'unset'
-    ShipImg.style.background = "url(\"img/ship_2.png\") no-repeat 0 0/contain"
-    ShipImg.style.animation = "none"
+    mainWheel.classList.remove('_win')
 })
 
 function displayPopup(popup) {
@@ -111,13 +85,47 @@ function displayPopup(popup) {
     popup.classList.remove('hide')
 }
 
-const bgv = document.querySelector(".zsu__main-video-bg");
-if (window.innerWidth > 1000) {
-    bgv.poster = bgv.dataset.poster;
-    const sources = bgv.getElementsByTagName("source");
 
-    for (let i = 0; i < sources.length; ++i) {
-        sources[i].src = sources[i].dataset.src;
-    }
-}
-bgv.load();
+(function () {
+    var url = new URL(window.location.href);
+    var params = ['l', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'param1', 'param2'];
+    var linkParams = ['affid', 'cpaid']; // ищем в url redirectUrl в url:
+
+    if (url.searchParams.has('redirectUrl')) {
+        var redirectUrl = new URL(url.searchParams.get('redirectUrl'));
+
+        if (redirectUrl.href.match(/\//g).length === 4 && redirectUrl.searchParams.get('l')) {
+            //если ссылка в ссылка redirectUrl корректная
+            localStorage.setItem('redirectUrl', redirectUrl.href); // указываем точкой входа домен с протоколом из redirectUrl
+        }
+    } /////////
+
+
+    params.forEach(function (param) {
+        if (url.searchParams.has(param)) localStorage.setItem(param, url.searchParams.get(param));
+    });
+    linkParams.forEach(function (linkParam) {
+        if (url.searchParams.has(linkParam)) localStorage.setItem(linkParam, url.searchParams.get(linkParam));
+    });
+    window.addEventListener('click', function (e) {
+        var link,
+            parent = e.target.closest('a');
+
+        if (parent.getAttribute('href') !== 'https://tds.favbet.partners') {
+            return;
+        }
+
+        parent && (e.preventDefault(),
+            localStorage.getItem("redirectUrl")
+                ? link = new URL(localStorage.getItem("redirectUrl"))
+                : (link = new URL(parent.href),
+                    affid = localStorage.getItem('affid'),
+                    cpaid = localStorage.getItem('cpaid'),
+                affid && cpaid && (link.pathname = '/' + affid + '/' + cpaid)), params.forEach(function (param)
+        {
+            url.searchParams.has(param) && link.searchParams.set(param, localStorage.getItem(param));
+        }), document.location.href = link);
+    });
+})();
+
+

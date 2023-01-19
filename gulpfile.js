@@ -96,8 +96,15 @@ let gulp = require('gulp')
             .pipe(gulp.dest('build/fonts'));
     });
 
+//COPY AUDIO
+gulp.task('copyAudio', function(){
+    return gulp.src('front/sounds/**', {since: gulp.lastRun('copyAudio')})
+        .pipe(newer(('build/sounds')))
+        .pipe(gulp.dest('build/sounds'));
+});
+
 //BUILD
-    gulp.task('build', gulp.series('clean', gulp.parallel('pug', 'sass', 'js', 'copyFonts', 'copyImg', 'copyJson')));
+    gulp.task('build', gulp.series('clean', gulp.parallel('pug', 'sass', 'js', 'copyFonts', 'copyImg', 'copyJson', 'copyAudio')));
 //STATIC SERVER
     gulp.task('server', function() {
         browserSync.init({
@@ -111,8 +118,9 @@ let gulp = require('gulp')
         gulp.watch('front/pug/**/*.*', gulp.series('pug'));
         gulp.watch('front/sass/**/*.*', gulp.series('sass'));
         gulp.watch('front/js/**/*.*', gulp.series('js'));
-        gulp.watch('front/fonts/**/*.*', gulp.series('copyFonts'));
-        gulp.watch('front/img/*.*', gulp.series('copyImg'));
+        gulp.watch('front/img/**/*.*', gulp.series('copyFonts'));
+        gulp.watch('front/img/**/*.*', gulp.series('copyImg'));
+        gulp.watch('front/sounds/**', gulp.series('copyAudio'));
         gulp.watch('front/json/**/*.*', gulp.series('copyJson'));
     });
 // DEV BUILD
